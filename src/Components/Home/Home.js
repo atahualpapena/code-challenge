@@ -20,9 +20,9 @@ const Home = () => {
       </Typography>
       <br />
       <Typography component="p">
-        Use the Navbar above me to go to check all the Albums available, <br />
+        Use the Navbar above to check all the Albums available, <br />
         from there you can select and specific album and display all the photos
-        for that album. <br /> If desired you can go directly to all the photos
+        for that album.
       </Typography>
     </Paper>
   );
