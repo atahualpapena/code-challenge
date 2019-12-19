@@ -1,64 +1,62 @@
 import React from "react";
 import axios from "axios";
-import { makeStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
+import useReactRouter from "use-react-router";
 
-const useStyles = makeStyles({
-  table: {
-    maxWidth: 800,
-    margin: "auto"
-  }
-});
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9)
-];
+import { Button, ListItem, ListItemText, List } from "@material-ui/core";
 
 const AlbumList = () => {
-  const classes = useStyles();
   const [albums, setAlbums] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [albumsPerPage, setAlbumsPerPage] = React.useState(10);
+  const { history } = useReactRouter();
+
   React.useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/albums").then(res => {
+    const fetchAlbums = async () => {
+      setLoading(true);
+      const res = await axios.get("http://localhost:3000/albums");
       setAlbums(res.data);
-    });
+      setLoading(false);
+    };
+    fetchAlbums();
   }, []);
+
+  const currentAlbums = albums.slice(
+    currentPage * albumsPerPage,
+    currentPage * albumsPerPage + albumsPerPage
+  );
+
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const handlePreviousPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
+  const handleClick = id => () => {
+    history.push(`/album/${id}`);
+  };
+
   return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Album Name</TableCell>
-            <TableCell align="right">Album Id</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {albums.map(album => (
-            <TableRow>
-              <TableCell component="th" scope="row">
-                {album.title}
-              </TableCell>
-              <TableCell align="right">{album.id}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div>
+      <List>
+        {albums.map((album, index) => (
+          <ListItem button={true} onClick={handleClick(album.id)} key={index}>
+            <ListItemText primary={album.title} />
+          </ListItem>
+        ))}
+      </List>
+      <Button disabled={currentPage === 1} onClick={handlePreviousPage}>
+        Previous Page
+      </Button>
+      <Button
+        disabled={currentPage >= albums.length / albumsPerPage}
+        onClick={handleNextPage}
+      >
+        Next Page
+      </Button>
+    </div>
   );
 };
 
