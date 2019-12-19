@@ -14,9 +14,9 @@ function App() {
         <NavBar />
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/photos" exact component={PhotoItem} />
           <Route path="/albums" exact component={AlbumList} />
-          <Route path="/albums/:id" exact component={AlbumSingle} />
+          <Route path="/album/:id" exact component={AlbumSingle} />
+          <Route path="/album/:id/photos" exact component={PhotoItem} />
         </Switch>
       </div>
     </Router>
