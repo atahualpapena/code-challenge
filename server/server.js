@@ -34,18 +34,23 @@ app.get("/albums", (req, res) => {
     });
 });
 
-app.get("/albums/:id", (req, res, next) => {
-  console.log(req.params.id);
-  res.send({
-    title: "hello",
-    id: 1,
-    extra: "hhahaah"
-  });
-  next();
+app.get("/albums/:id", (req, res) => {
   axios
-    .get(`https://jsonplaeholder.typicode.com/albums/${req.params.id}`)
+    .get(`https://jsonplaceholder.typicode.com/albums/${req.params.id}`)
     .then(function(response) {
-      console.log(response.data);
+      res.json(response.data);
+    })
+    .catch(function(error) {
+      res.json(`Error ocurred: ${error}`);
+    });
+});
+
+app.get("/photos/:albumId", (req, res) => {
+  axios
+    .get(
+      `https://jsonplaceholder.typicode.com/photos?albumId=${req.params.albumId}`
+    )
+    .then(function(response) {
       res.json(response.data);
     })
     .catch(function(error) {
