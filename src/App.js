@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
-import PhotoItem from "./PhotoItem/PhotoItem";
-import NavBar from "./NavBar/NavBar";
+import PhotoItem from "./Components/PhotoItem/PhotoItem";
+import NavBar from "./Components/NavBar/NavBar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import AlbumList from "./AlbumList/AlbumList";
-import AlbumSingle from "./AlbumSingle/AlbumSingle";
-import Home from "./Home/Home";
+import AlbumList from "./Components/AlbumList/AlbumList";
+import AlbumSingle from "./Components/AlbumSingle/AlbumSingle";
+import Home from "./Components/Home/Home";
 
 function App() {
   return (
