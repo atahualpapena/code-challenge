@@ -6,7 +6,7 @@ const NavBar = () => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Typography variant="h7">Code Challenge</Typography>
+        <Typography variant="h6">Code Challenge</Typography>
         <Link to="/albums">
           <Button color="inherit">Albums</Button>
         </Link>
