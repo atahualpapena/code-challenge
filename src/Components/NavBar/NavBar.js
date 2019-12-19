@@ -10,9 +10,6 @@ const NavBar = () => {
         <Link to="/albums">
           <Button color="inherit">Albums</Button>
         </Link>
-        <Link to="/photos">
-          <Button color="inherit">Photos</Button>
-        </Link>
         <Link to="/">
           <Button color="inherit">Home</Button>
         </Link>
