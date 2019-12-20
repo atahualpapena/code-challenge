@@ -36,7 +36,7 @@ const AlbumSingle = () => {
     fetchAlbums();
   }, []);
 
-  const handleClick = id => () => {
+  const handleClick = () => {
     history.push(`/photos/${id}`);
   };
 
