@@ -33,7 +33,6 @@ const AlbumList = () => {
   };
 
   const handleClick = id => () => {
-    console.log(id);
     history.push(`/albums/${id}`);
   };
 

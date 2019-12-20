@@ -32,11 +32,10 @@ const PhotoItem = () => {
   React.useEffect(() => {
     const fetchPhotos = async () => {
       const res = await axios.get(`http://localhost:3000/photos/${id}`);
-      console.log(res.data);
       setPhotos(res.data);
     };
     fetchPhotos();
-  });
+  }, [id]);
 
   const handleNextPage = () => {
     setCurrentPage(currentPage + 1);

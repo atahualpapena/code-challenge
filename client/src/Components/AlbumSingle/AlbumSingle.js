@@ -30,11 +30,10 @@ const AlbumSingle = () => {
   React.useEffect(() => {
     const fetchAlbums = async () => {
       const res = await axios.get(`http://localhost:3000/albums/${id}`);
-      console.log(res);
       setAlbum(res.data);
     };
     fetchAlbums();
-  });
+  }, [id]);
 
   const handleClick = () => {
     history.push(`/photos/${id}`);
