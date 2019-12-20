@@ -25,6 +25,7 @@ Launches the ExpressJs Server
 ### `npm start`
 
 **cd into the client folder with `cd client/` then run `npm start`**
+
 Runs the client app in the development mode.<br />
 
 ### Powered by
