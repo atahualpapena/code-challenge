@@ -34,7 +34,7 @@ const AlbumSingle = () => {
       setAlbum(res.data);
     };
     fetchAlbums();
-  }, []);
+  });
 
   const handleClick = () => {
     history.push(`/photos/${id}`);

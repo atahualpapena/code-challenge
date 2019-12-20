@@ -6,6 +6,7 @@ import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import { Container, Button } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
   card: {
@@ -35,7 +36,7 @@ const PhotoItem = () => {
       setPhotos(res.data);
     };
     fetchPhotos();
-  }, []);
+  });
 
   const handleNextPage = () => {
     setCurrentPage(currentPage + 1);
@@ -47,6 +48,7 @@ const PhotoItem = () => {
 
   return (
     <Container>
+      <Typography variant="h3">Photos List</Typography>
       {photos
         .slice(
           currentPage * photosPerPage,
