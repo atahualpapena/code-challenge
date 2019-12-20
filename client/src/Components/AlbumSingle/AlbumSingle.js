@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
+import { Button, Container } from "@material-ui/core";
 
 const useStyles = makeStyles({
   card: {
@@ -41,24 +41,27 @@ const AlbumSingle = () => {
 
   return (
     <div>
-      <Card className={classes.card}>
-        {!album && <Typography variant="h5">Loading Album Name</Typography>}
-        <CardContent>
-          {album && (
-            <Typography className={classes.pos} color="textSecondary">
-              {album.title}
+      <Container>
+        <Typography variant="h3">Album Detail</Typography>
+        <Card className={classes.card}>
+          {!album && <Typography variant="h5">Loading Album Name</Typography>}
+          <CardContent>
+            {album && (
+              <Typography className={classes.pos} color="textSecondary">
+                {album.title}
+              </Typography>
+            )}
+            <Typography variant="body2" component="p">
+              This is a great Album, peak inside!
             </Typography>
-          )}
-          <Typography variant="body2" component="p">
-            This is a great Album, peak inside!
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button onClick={handleClick} size="small">
-            Go To Photos
-          </Button>
-        </CardActions>
-      </Card>
+          </CardContent>
+          <CardActions>
+            <Button onClick={handleClick} size="small">
+              Go To Photos
+            </Button>
+          </CardActions>
+        </Card>
+      </Container>
     </div>
   );
 };
