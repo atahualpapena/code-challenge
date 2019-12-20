@@ -7,7 +7,8 @@ import {
   ListItem,
   ListItemText,
   List,
-  Container
+  Container,
+  Typography
 } from "@material-ui/core";
 
 const AlbumList = () => {
@@ -38,6 +39,7 @@ const AlbumList = () => {
 
   return (
     <Container>
+      <Typography variant="h3">Albums List</Typography>
       <List>
         {albums
           .slice(
