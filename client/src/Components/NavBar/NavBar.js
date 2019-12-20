@@ -7,10 +7,10 @@ const NavBar = () => {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6">Code Challenge</Typography>
-        <Link to="/albums">
+        <Link to="/albums" style={{ color: "white" }}>
           <Button color="inherit">Albums</Button>
         </Link>
-        <Link to="/">
+        <Link to="/" style={{ color: "white" }}>
           <Button color="inherit">Home</Button>
         </Link>
       </Toolbar>
