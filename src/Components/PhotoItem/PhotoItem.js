@@ -5,16 +5,15 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
-import CardActions from "@material-ui/core/CardActions";
-import IconButton from "@material-ui/core/IconButton";
-
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { Container, Button } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
   card: {
     maxWidth: 345,
     marginTop: 20,
-    margin: "auto"
+    marginRight: 20,
+    margin: "auto",
+    display: "inline-block"
   },
   media: {
     height: 0,
@@ -23,11 +22,12 @@ const useStyles = makeStyles(() => ({
 }));
 
 const PhotoItem = () => {
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [photosPerPage] = React.useState(10);
   const classes = useStyles();
-
   const { match } = useReactRouter();
   const { id } = match.params;
-  const [photo, setPhotos] = React.useState([]);
+  const [photos, setPhotos] = React.useState([]);
   React.useEffect(() => {
     const fetchPhotos = async () => {
       const res = await axios.get(`http://localhost:3000/photos/${id}`);
@@ -36,16 +36,39 @@ const PhotoItem = () => {
     };
     fetchPhotos();
   }, []);
+
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const handlePreviousPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
   return (
-    <Card className={classes.card}>
-      <CardHeader title={photo.title} subheader={id} />
-      <CardMedia className={classes.media} image={photo.thumbnailUrl} />
-      <CardActions disableSpacing>
-        <IconButton aria-label="Go To Albums">
-          <ArrowBackIcon />
-        </IconButton>
-      </CardActions>
-    </Card>
+    <Container>
+      {photos
+        .slice(
+          currentPage * photosPerPage,
+          currentPage * photosPerPage + photosPerPage
+        )
+        .map((photo, index) => (
+          <Card className={classes.card} key={index}>
+            <CardHeader title={photo.title} subheader={id} />
+            <CardMedia className={classes.media} image={photo.thumbnailUrl} />
+          </Card>
+        ))}
+      <br />
+      <Button disabled={currentPage === 1} onClick={handlePreviousPage}>
+        Previous Page
+      </Button>
+      <Button
+        disabled={currentPage >= photos.length / photosPerPage}
+        onClick={handleNextPage}
+      >
+        Next Page
+      </Button>
+    </Container>
   );
 };
 
